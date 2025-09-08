@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup(config)
 	-- Set configuration
-	config = config or {
+	local config = config or {
 		split_toggle = "<Leader>t<CR>",
 		float_toggle = "<Leader>tf<CR>",
 	}
