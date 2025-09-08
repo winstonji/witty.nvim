@@ -3,7 +3,7 @@ A simple terminal window plugin for neovim with a witty name
 
 ## Installation
 
-### Lazy.nvim
+### lazy.nvim
 ```Lua
 {
     "winstonji/witty.nvim",
