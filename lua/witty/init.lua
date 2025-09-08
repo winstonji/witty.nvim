@@ -1,14 +1,6 @@
 local M = {}
 
 function M.setup(config)
-	-- Set configuration
-	config = config or {
-		keybinds = {
-			split_toggle = "<Leader><CR>",
-			float_toggle = "<Leader>f<CR>",
-		},
-	}
-
 	-- Create stored state
 	local state = {
 		terminal = {
@@ -71,8 +63,19 @@ function M.setup(config)
 		return { buf = buf, win = win }
 	end
 
+	local split_toggle = "<Leader><CR>"
+	local float_toggle = "<Leader>f<CR>"
+
+	if config.keybinds.split_toggle then
+		split_toggle = config.keybinds.split_toggle
+	end
+
+	if config.keybinds.float_toggle then
+		float_toggle = config.keybinds.float_toggle
+	end
+
 	-- Open split terminal
-	vim.keymap.set({ "n", "t" }, config.keybinds.split_toggle, function()
+	vim.keymap.set({ "n", "t" }, split_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			state.terminal = create_split_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
@@ -85,7 +88,7 @@ function M.setup(config)
 	end, { desc = "Toggle [<CR>]Terminal emulator" })
 
 	-- Open floating terminal
-	vim.keymap.set({ "n", "t" }, config.keybinds.float_toggle, function()
+	vim.keymap.set({ "n", "t" }, float_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			state.terminal = create_floating_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
