@@ -2,9 +2,11 @@ local M = {}
 
 function M.setup(config)
 	-- Set configuration
-	local config = config or {
-		split_toggle = "<Leader>t<CR>",
-		float_toggle = "<Leader>tf<CR>",
+	config = config or {
+		keybinds = {
+			split_toggle = "<Leader><CR>",
+			float_toggle = "<Leader>f<CR>",
+		},
 	}
 
 	-- Create stored state
@@ -70,7 +72,7 @@ function M.setup(config)
 	end
 
 	-- Open split terminal
-	vim.keymap.set({ "n", "t" }, config.split_toggle, function()
+	vim.keymap.set({ "n", "t" }, config.keybinds.split_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			state.terminal = create_split_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
@@ -83,7 +85,7 @@ function M.setup(config)
 	end, { desc = "Toggle [<CR>]Terminal emulator" })
 
 	-- Open floating terminal
-	vim.keymap.set({ "n", "t" }, config.float_toggle, function()
+	vim.keymap.set({ "n", "t" }, config.keybinds.float_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			state.terminal = create_floating_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
