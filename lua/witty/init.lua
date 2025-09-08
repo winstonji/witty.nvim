@@ -3,8 +3,8 @@ local M = {}
 function M.setup(config)
 	-- Set configuration
 	config = config or {
-		split_toggle = "<Leader><CR>",
-		float_toggle = "<Leader>f<CR>",
+		split_toggle = "<Leader>t<CR>",
+		float_toggle = "<Leader>tf<CR>",
 	}
 
 	-- Create stored state
