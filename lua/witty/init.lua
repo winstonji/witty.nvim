@@ -66,11 +66,11 @@ function M.setup(config)
 	local split_toggle = "<Leader><CR>"
 	local float_toggle = "<Leader>f<CR>"
 
-	if config.keybinds.split_toggle then
+	if config.keybinds and config.keybinds.split_toggle then
 		split_toggle = config.keybinds.split_toggle
 	end
 
-	if config.keybinds.float_toggle then
+	if config.keybinds and config.keybinds.float_toggle then
 		float_toggle = config.keybinds.float_toggle
 	end
 
