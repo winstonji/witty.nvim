@@ -65,7 +65,7 @@ function M.setup(config)
 		local win = vim.api.nvim_open_win(buf, true, win_config)
 		vim.api.nvim_set_option_value(
 			"winhighlight",
-			"Normal:WittyNormal,FloatBorder:WittyBorder",
+			"Normal:WittyNormal,FloatBorder:WittyBorder,FloatTitle:WittyTitle",
 			{ scope = "local", win = win }
 		)
 		return { buf = buf, win = win }
