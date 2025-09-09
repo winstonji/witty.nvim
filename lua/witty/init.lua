@@ -94,7 +94,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-	end, { desc = "Toggle [Enter]Terminal emulator" })
+	end, { desc = "Toggle [<CR>]Terminal emulator" })
 
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
@@ -107,7 +107,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-	end, { desc = "Toggle [F]loating [Enter]Terminal emulator" })
+	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
