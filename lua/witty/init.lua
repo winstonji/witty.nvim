@@ -63,6 +63,7 @@ function M.setup(config)
 
 		-- Create floating window
 		local win = vim.api.nvim_open_win(buf, true, win_config)
+		vim.api.nvim_win_set_option(win, "winhighlight", "Normal:WittyNormal,FloatBorder:WittyBorder")
 		return { buf = buf, win = win }
 	end
 
