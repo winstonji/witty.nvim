@@ -3,9 +3,9 @@ if vim.fn.has("nvim-0.7.0") ~= 1 then
 end
 
 local highlights = {
-	WittyFloat = { default = true, link = "Normal" },
+	WittyFloat = { default = true, link = "NormalNC" },
 	WittyBorder = { default = true, bg = "none" },
-	WittyTitle = { default = true, bg = "Normal" },
+	WittyTitle = { default = true, bg = "NormalNC" },
 }
 
 for k, v in pairs(highlights) do
