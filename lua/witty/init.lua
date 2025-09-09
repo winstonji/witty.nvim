@@ -72,8 +72,10 @@ function M.setup(config)
 		return { buf = buf, win = win }
 	end
 
-	local split_toggle = "<Leader><CR>"
-	local float_toggle = "<Leader>f<CR>"
+	local witty_toggle = "<Leader><CR>"
+	local float_toggle = "<Leader>wf"
+	local split_toggle = "<Leader>ws"
+	local vertical_toggle = "<Leader>wv"
 
 	if config.keybinds and config.keybinds.split_toggle then
 		split_toggle = config.keybinds.split_toggle
@@ -83,10 +85,17 @@ function M.setup(config)
 		float_toggle = config.keybinds.float_toggle
 	end
 
-	-- Open split terminal
-	vim.keymap.set({ "n", "t" }, split_toggle, function()
+	-- Toggle terminal
+	vim.keymap.set({ "n", "t" }, witty_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
-			state.terminal = create_split_window({ buf = state.terminal.buf })
+			if state.type == "floating" then
+				state.terminal = create_split_window({ buf = state.terminal.buf })
+			elseif state.type == "split" then
+				state.terminal = create_floating_window({ buf = state.terminal.buf })
+			end
+
+			-- TODO: implement vertical split
+
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
 			end
@@ -96,15 +105,27 @@ function M.setup(config)
 		end
 	end, { desc = "Toggle Terminal emulator" })
 
+	-- Open split terminal
+	vim.keymap.set({ "n", "t" }, split_toggle, function()
+		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "split" then
+			vim.api.nvim_win_hide(state.terminal.win)
+			state.terminal = create_split_window({ buf = state.terminal.buf })
+			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
+				vim.cmd.term()
+			end
+			vim.cmd.startinsert()
+		end
+	end, { desc = "Toggle Terminal emulator" })
+
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
-		if not vim.api.nvim_win_is_valid(state.terminal.win) then
+		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "floating" then
+			vim.api.nvim_win_hide(state.terminal.win)
 			state.terminal = create_floating_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
 			end
 			vim.cmd.startinsert()
-		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
 	end, { desc = "Toggle [F]loating Terminal emulator" })
