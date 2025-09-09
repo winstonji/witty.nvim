@@ -150,7 +150,7 @@ function M.setup(config)
 			end
 			vim.cmd.startinsert()
 		end
-	end, { desc = "Toggle Terminal Emulator" })
+	end, { desc = "Toggle [W]itty [S]plit" })
 
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
@@ -165,7 +165,7 @@ function M.setup(config)
 			end
 			vim.cmd.startinsert()
 		end
-	end, { desc = "Toggle [F]loating Terminal emulator" })
+	end, { desc = "Toggle [W]itty [F]loating" })
 
 	-- Open vertical terminal
 	vim.keymap.set({ "n", "t" }, vertical_toggle, function()
@@ -180,7 +180,7 @@ function M.setup(config)
 			end
 			vim.cmd.startinsert()
 		end
-	end, { desc = "Toggle Terminal Emulator" })
+	end, { desc = "Toggle [W]itty [V]ertical" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
