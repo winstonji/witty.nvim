@@ -89,7 +89,6 @@ function M.setup(config)
 	vim.keymap.set({ "n", "t" }, witty_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			if state.type == "floating" then
-				state.terminal = create_floating_window({ buf = state.terminal.buf })
 			elseif state.type == "split" then
 				state.terminal = create_split_window({ buf = state.terminal.buf })
 			end
@@ -132,7 +131,6 @@ function M.setup(config)
 				vim.cmd.term()
 			end
 			vim.cmd.startinsert()
-			vim.api.nvim_win_hide(state.terminal.win)
 		end
 	end, { desc = "Toggle [F]loating Terminal emulator" })
 
