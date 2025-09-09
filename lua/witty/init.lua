@@ -57,7 +57,8 @@ function M.setup(config)
 			col = col,
 			row = row,
 			border = "rounded",
-			title = [[ Terminal ], [WittyNormal]],
+			title = [[ Terminal ]],
+			[[ WittyNormal ]],
 			title_pos = "center",
 		}
 
