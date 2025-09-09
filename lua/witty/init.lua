@@ -108,7 +108,9 @@ function M.setup(config)
 	-- Open split terminal
 	vim.keymap.set({ "n", "t" }, split_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "split" then
-			vim.api.nvim_win_hide(state.terminal.win)
+			if not vim.api.nvim_win_is_valid(state.terminal.win) then
+				vim.api.nvim_win_hide(state.terminal.win)
+			end
 			state.terminal = create_split_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
@@ -120,7 +122,9 @@ function M.setup(config)
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "floating" then
-			vim.api.nvim_win_hide(state.terminal.win)
+			if not vim.api.nvim_win_is_valid(state.terminal.win) then
+				vim.api.nvim_win_hide(state.terminal.win)
+			end
 			state.terminal = create_floating_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
