@@ -26,10 +26,6 @@ function M.setup(config)
 		local win_config = {
 			split = "below",
 			height = height,
-			style = "minimal",
-			border = "rounded",
-			title = " Terminal ",
-			title_pos = "center",
 		}
 
 		local win = vim.api.nvim_open_win(buf, true, win_config)
