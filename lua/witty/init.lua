@@ -63,7 +63,6 @@ function M.setup(config)
 
 		-- Create floating window
 		local win = vim.api.nvim_open_win(buf, true, win_config)
-		vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
 		return { buf = buf, win = win }
 	end
 
@@ -103,6 +102,23 @@ function M.setup(config)
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
 	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
+
+	local set_hl_for_floating_window = function()
+		vim.api.nvim_set_hl(0, "NormalFloat", {
+			link = "Normal",
+		})
+		vim.api.nvim_set_hl(0, "FloatBorder", {
+			bg = "none",
+		})
+	end
+
+	set_hl_for_floating_window()
+
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		pattern = "*",
+		desc = "Avoid overwritten by loading color schemes later",
+		callback = set_hl_for_floating_window,
+	})
 end
 
 return M
