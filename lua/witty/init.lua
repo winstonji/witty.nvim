@@ -101,7 +101,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-		vim.api.nvim_set_hl(0, "Terminal", {})
+		vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
 	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
 end
 
