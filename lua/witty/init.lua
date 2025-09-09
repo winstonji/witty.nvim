@@ -89,9 +89,9 @@ function M.setup(config)
 	vim.keymap.set({ "n", "t" }, witty_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) then
 			if state.type == "floating" then
-				state.terminal = create_split_window({ buf = state.terminal.buf })
-			elseif state.type == "split" then
 				state.terminal = create_floating_window({ buf = state.terminal.buf })
+			elseif state.type == "split" then
+				state.terminal = create_split_window({ buf = state.terminal.buf })
 			end
 
 			-- TODO: implement vertical split
@@ -118,7 +118,7 @@ function M.setup(config)
 			end
 			vim.cmd.startinsert()
 		end
-	end, { desc = "Toggle Terminal emulator" })
+	end, { desc = "Toggle Terminal Emulator" })
 
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
