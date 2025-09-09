@@ -100,6 +100,7 @@ function M.setup(config)
 	local float_toggle = "<Leader>wf"
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
+	local witty_hide = "<Esc>"
 
 	if config.keybinds and config.keybinds.witty_toggle then
 		witty_toggle = config.keybinds.witty_toggle
@@ -115,6 +116,10 @@ function M.setup(config)
 
 	if config.keybinds and config.keybinds.vertical_toggle then
 		vertical_toggle = config.keybinds.vertical_toggle
+	end
+
+	if config.keybinds and config.keybinds.witty_hide then
+		witty_hide = config.keybinds.witty_hide
 	end
 
 	-- Toggle terminal
@@ -183,6 +188,13 @@ function M.setup(config)
 	end, { desc = "Toggle [W]itty [V]ertical" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
+
+	-- Escape from terminal
+	vim.keymap.set("n", witty_hide, function()
+		if vim.api.nvim_win_is_valid(state.terminal.win) then
+			vim.api.nvim_win_hide(state.terminal.win)
+		end
+	end, { desc = "Hide open witty.nvim window" })
 
 	vim.api.nvim_create_autocmd("TermEnter", {
 		desc = "Change local options when exiting Terminal Mode",
