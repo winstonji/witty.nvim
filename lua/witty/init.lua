@@ -7,6 +7,7 @@ function M.setup(config)
 			buf = -1,
 			win = -1,
 		},
+		type = "floating",
 	}
 
 	local function create_split_window(opts)
@@ -93,7 +94,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-	end, { desc = "Toggle [<CR>]Terminal emulator" })
+	end, { desc = "Toggle [`<CR`>]Terminal emulator" })
 
 	-- Open floating terminal
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
@@ -106,7 +107,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
+	end, { desc = "Toggle [F]loating [`<CR`>]Terminal emulator" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
