@@ -103,22 +103,42 @@ function M.setup(config)
 		end
 	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
 
-	local set_hl_for_floating_window = function()
-		vim.api.nvim_set_hl(0, "NormalFloat", {
-			link = "Normal",
-		})
-		vim.api.nvim_set_hl(0, "FloatBorder", {
-			bg = "none",
-		})
-	end
+	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
-	set_hl_for_floating_window()
-
-	vim.api.nvim_create_autocmd("ColorScheme", {
-		pattern = "*",
-		desc = "Avoid overwritten by loading color schemes later",
-		callback = set_hl_for_floating_window,
+	vim.api.nvim_create_autocmd("TermEnter", {
+		desc = "Change local options when exiting Terminal Mode",
+		group = term_group,
+		callback = function()
+			vim.opt_local.number = false
+			vim.opt_local.relativenumber = false
+		end,
 	})
+
+	vim.api.nvim_create_autocmd("TermLeave", {
+		desc = "Change local options when exiting Terminal Mode",
+		group = term_group,
+		callback = function()
+			vim.opt_local.number = true
+			vim.opt_local.relativenumber = true
+		end,
+	})
+
+	-- local set_hl_for_floating_window = function()
+	-- 	vim.api.nvim_set_hl(0, "NormalFloat", {
+	-- 		link = "Normal",
+	-- 	})
+	-- 	vim.api.nvim_set_hl(0, "FloatBorder", {
+	-- 		bg = "none",
+	-- 	})
+	-- end
+	--
+	-- set_hl_for_floating_window()
+	--
+	-- vim.api.nvim_create_autocmd("ColorScheme", {
+	-- 	pattern = "*",
+	-- 	desc = "Avoid overwritten by loading color schemes later",
+	-- 	callback = set_hl_for_floating_window,
+	-- })
 end
 
 return M
