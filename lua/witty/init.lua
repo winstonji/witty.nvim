@@ -34,6 +34,30 @@ function M.setup(config)
 		return { buf = buf, win = win }
 	end
 
+	local function create_vertical_window(opts)
+		-- Set options
+		opts = opts or {}
+		local height = opts.height or math.min(15, math.floor(vim.o.lines * 0.2))
+
+		-- Create buffer
+		local buf = nil
+		if vim.api.nvim_buf_is_valid(opts.buf) then
+			buf = opts.buf
+		else
+			buf = vim.api.nvim_create_buf(false, true)
+		end
+
+		-- Set window configuration
+		local win_config = {
+			win = -1,
+			split = "right",
+			height = height,
+		}
+
+		local win = vim.api.nvim_open_win(buf, true, win_config)
+		return { buf = buf, win = win }
+	end
+
 	local function create_floating_window(opts)
 		-- Set options
 		opts = opts or {}
@@ -77,12 +101,20 @@ function M.setup(config)
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
 
-	if config.keybinds and config.keybinds.split_toggle then
-		split_toggle = config.keybinds.split_toggle
+	if config.keybinds and config.keybinds.witty_toggle then
+		witty_toggle = config.keybinds.witty_toggle
 	end
 
 	if config.keybinds and config.keybinds.float_toggle then
 		float_toggle = config.keybinds.float_toggle
+	end
+
+	if config.keybinds and config.keybinds.split_toggle then
+		split_toggle = config.keybinds.split_toggle
+	end
+
+	if config.keybinds and config.keybinds.vertical_toggle then
+		vertical_toggle = config.keybinds.vertical_toggle
 	end
 
 	-- Toggle terminal
@@ -134,6 +166,21 @@ function M.setup(config)
 			vim.cmd.startinsert()
 		end
 	end, { desc = "Toggle [F]loating Terminal emulator" })
+
+	-- Open vertical terminal
+	vim.keymap.set({ "n", "t" }, vertical_toggle, function()
+		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "vertical" then
+			state.type = "vertical"
+			if vim.api.nvim_win_is_valid(state.terminal.win) then
+				vim.api.nvim_win_hide(state.terminal.win)
+			end
+			state.terminal = create_vertical_window({ buf = state.terminal.buf })
+			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
+				vim.cmd.term()
+			end
+			vim.cmd.startinsert()
+		end
+	end, { desc = "Toggle Terminal Emulator" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
