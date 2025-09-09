@@ -24,6 +24,7 @@ function M.setup(config)
 
 		-- Set window configuration
 		local win_config = {
+			win = -1,
 			split = "below",
 			height = height,
 		}
@@ -100,6 +101,7 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
+		vim.api.nvim_set_hl(0, "Terminal", {})
 	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
 end
 
