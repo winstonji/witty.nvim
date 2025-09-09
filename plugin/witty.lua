@@ -8,9 +8,9 @@ end
 -- vim.g.loaded_witty = 1
 
 local highlights = {
-	WittyFloat = { default = true, link = "Normal" },
-	WittyBorder = { default = true, link = "Normal", bg = "none" },
-	WittyTitle = { default = true, link = "Normal" },
+	WittyFloat = { link = "Normal" },
+	WittyBorder = { link = "Normal", bg = "none" },
+	WittyTitle = { link = "Normal" },
 }
 
 for k, v in pairs(highlights) do
