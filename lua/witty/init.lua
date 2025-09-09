@@ -124,9 +124,9 @@ function M.setup(config)
 				state.terminal = create_floating_window({ buf = state.terminal.buf })
 			elseif state.type == "split" then
 				state.terminal = create_split_window({ buf = state.terminal.buf })
+			elseif state.type == "vertical" then
+				state.terminal = create_vertical_window({ buf = state.terminal.buf })
 			end
-
-			-- TODO: implement vertical split
 
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
