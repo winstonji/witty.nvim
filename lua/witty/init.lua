@@ -55,7 +55,6 @@ function M.setup(config)
 			height = height,
 			col = col,
 			row = row,
-			style = "minimal",
 			border = "rounded",
 			title = " Terminal ",
 			title_pos = "center",
