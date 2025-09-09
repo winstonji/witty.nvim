@@ -63,6 +63,7 @@ function M.setup(config)
 
 		-- Create floating window
 		local win = vim.api.nvim_open_win(buf, true, win_config)
+		vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
 		return { buf = buf, win = win }
 	end
 
@@ -101,7 +102,6 @@ function M.setup(config)
 		else
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-		vim.api.nvim_set_hl(0, "Terminal", { bg = "none" })
 	end, { desc = "Toggle [F]loating [<CR>]Terminal emulator" })
 end
 
