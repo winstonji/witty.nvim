@@ -8,12 +8,11 @@ end
 -- vim.g.loaded_witty = 1
 
 local highlights = {
-	WittyFloat = { link = "Normal" },
+	WittyNormal = { link = "Normal" },
 	WittyBorder = { link = "Normal", bg = "none" },
 	WittyTitle = { link = "Normal" },
 }
 
 for k, v in pairs(highlights) do
-	vim.api.nvim_create_namespace(k)
 	vim.api.nvim_set_hl(0, k, v)
 end
