@@ -59,7 +59,6 @@ function M.setup(config)
 			border = "rounded",
 			title = " Terminal ",
 			title_pos = "center",
-			winhighlight = "FloatTitle:WittyTitle,FloatBorder:WittyBorder",
 		}
 
 		-- Create floating window
