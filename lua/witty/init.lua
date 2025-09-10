@@ -195,8 +195,16 @@ function M.setup(config)
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
 	end, { desc = "Hide open witty.nvim window" })
+
 	-- Escape from terminal with "q"
 	vim.keymap.set("n", "q", function()
+		if vim.api.nvim_win_is_valid(state.terminal.win) then
+			vim.api.nvim_win_hide(state.terminal.win)
+		end
+	end, { desc = "Hide open witty.nvim window" })
+
+	-- Escape from terminal with <C-q>
+	vim.keymap.set({ "n", "t" }, "<C-q>", function()
 		if vim.api.nvim_win_is_valid(state.terminal.win) then
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
