@@ -100,7 +100,7 @@ function M.setup(config)
 	local float_toggle = "<Leader>wf"
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
-	local witty_hide = "{<Esc>, q}"
+	local witty_hide = "<Esc>"
 
 	if config.keybinds and config.keybinds.witty_toggle then
 		witty_toggle = config.keybinds.witty_toggle
@@ -191,6 +191,12 @@ function M.setup(config)
 
 	-- Escape from terminal
 	vim.keymap.set("n", witty_hide, function()
+		if vim.api.nvim_win_is_valid(state.terminal.win) then
+			vim.api.nvim_win_hide(state.terminal.win)
+		end
+	end, { desc = "Hide open witty.nvim window" })
+	-- Escape from terminal with "q"
+	vim.keymap.set("n", "q", function()
 		if vim.api.nvim_win_is_valid(state.terminal.win) then
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
