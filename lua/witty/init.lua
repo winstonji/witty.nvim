@@ -200,8 +200,8 @@ function M.setup(config)
 		state.terminal.buf,
 		"n",
 		witty_hide,
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+		":Lua hide_terminal()<CR>",
+		{ desc = "Hide open witty.nvim window" }
 	)
 
 	-- Escape from terminal with "q"
@@ -209,8 +209,8 @@ function M.setup(config)
 		state.terminal.buf,
 		"n",
 		"q",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+		":Lua hide_terminal()<CR>",
+		{ desc = "Hide open witty.nvim window" }
 	)
 
 	-- Escape from terminal with <C-q>
@@ -218,15 +218,15 @@ function M.setup(config)
 		state.terminal.buf,
 		"n",
 		"<C-q>",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+		":Lua hide_terminal()<CR>",
+		{ desc = "Hide open witty.nvim window" }
 	)
 	vim.api.nvim_buf_set_keymap(
 		state.terminal.buf,
 		"t",
 		"<C-q>",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+		":Lua hide_terminal()<CR>",
+		{ desc = "Hide open witty.nvim window" }
 	)
 
 	vim.api.nvim_create_autocmd("TermEnter", {
