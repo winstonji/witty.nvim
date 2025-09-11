@@ -189,26 +189,45 @@ function M.setup(config)
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
-	-- Escape from terminal
-	vim.keymap.set("n", witty_hide, function()
+	local function hide_terminal()
 		if vim.api.nvim_win_is_valid(state.terminal.win) then
 			vim.api.nvim_win_hide(state.terminal.win)
 		end
-	end, { desc = "Hide open witty.nvim window" })
+	end
+
+	-- Escape from terminal
+	vim.api.nvim_buf_set_keymap(
+		state.terminal.buf,
+		"n",
+		witty_hide,
+		"",
+		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+	)
 
 	-- Escape from terminal with "q"
-	vim.keymap.set("n", "q", function()
-		if vim.api.nvim_win_is_valid(state.terminal.win) then
-			vim.api.nvim_win_hide(state.terminal.win)
-		end
-	end, { desc = "Hide open witty.nvim window" })
+	vim.api.nvim_buf_set_keymap(
+		state.terminal.buf,
+		"n",
+		"q",
+		"",
+		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+	)
 
 	-- Escape from terminal with <C-q>
-	vim.keymap.set({ "n", "t" }, "<C-q>", function()
-		if vim.api.nvim_win_is_valid(state.terminal.win) then
-			vim.api.nvim_win_hide(state.terminal.win)
-		end
-	end, { desc = "Hide open witty.nvim window" })
+	vim.api.nvim_buf_set_keymap(
+		state.terminal.buf,
+		"n",
+		"<C-q>",
+		"",
+		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+	)
+	vim.api.nvim_buf_set_keymap(
+		state.terminal.buf,
+		"t",
+		"<C-q>",
+		"",
+		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
+	)
 
 	vim.api.nvim_create_autocmd("TermEnter", {
 		desc = "Change local options when exiting Terminal Mode",
