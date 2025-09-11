@@ -100,7 +100,6 @@ function M.setup(config)
 	local float_toggle = "<Leader>wf"
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
-	local witty_hide = "<Esc>"
 
 	if config.keybinds and config.keybinds.witty_toggle then
 		witty_toggle = config.keybinds.witty_toggle
@@ -188,46 +187,6 @@ function M.setup(config)
 	end, { desc = "Toggle [W]itty [V]ertical" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
-
-	local function hide_terminal()
-		if vim.api.nvim_win_is_valid(state.terminal.win) then
-			vim.api.nvim_win_hide(state.terminal.win)
-		end
-	end
-
-	-- Escape from terminal
-	vim.api.nvim_buf_set_keymap(
-		state.terminal.buf,
-		"n",
-		witty_hide,
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
-	)
-
-	-- Escape from terminal with "q"
-	vim.api.nvim_buf_set_keymap(
-		state.terminal.buf,
-		"n",
-		"q",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
-	)
-
-	-- Escape from terminal with <C-q>
-	vim.api.nvim_buf_set_keymap(
-		state.terminal.buf,
-		"n",
-		"<C-q>",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
-	)
-	vim.api.nvim_buf_set_keymap(
-		state.terminal.buf,
-		"t",
-		"<C-q>",
-		"",
-		{ callback = hide_terminal(), desc = "Hide open witty.nvim window" }
-	)
 
 	vim.api.nvim_create_autocmd("TermEnter", {
 		desc = "Change local options when exiting Terminal Mode",

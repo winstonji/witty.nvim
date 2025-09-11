@@ -20,7 +20,6 @@ opts = {
         float_toggle = "<Leader>wf"
         split_toggle = "<Leader>ws"
         vertical_toggle = "<Leader>wv"
-        witty_hide = "<Esc>"
     }
 }
 ```
