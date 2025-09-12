@@ -20,7 +20,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
@@ -44,7 +44,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
@@ -71,7 +71,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
