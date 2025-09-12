@@ -4,7 +4,7 @@ function M.setup(config)
 	-- Create stored state
 	local state = {
 		terminal = {
-			buf = -1,
+			buf = vim.api.nvim_create_buf(true, true),
 			win = -1,
 		},
 		type = (config and config.defaults and config.defaults.type) or "floating",
@@ -21,7 +21,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
@@ -45,7 +45,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
@@ -72,7 +72,7 @@ function M.setup(config)
 		if vim.api.nvim_buf_is_valid(opts.buf) then
 			buf = opts.buf
 		else
-			buf = vim.api.nvim_create_buf(false, true)
+			buf = vim.api.nvim_create_buf(true, true)
 		end
 
 		-- Set window configuration
