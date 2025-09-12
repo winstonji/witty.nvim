@@ -11,7 +11,6 @@ function M.setup(config)
 	}
 
 	local function create_split_window(opts)
-		print(state.terminal.buf)
 		-- Set options
 		opts = opts or {}
 		local height = opts.height or math.min(15, math.floor(vim.o.lines * 0.2))
