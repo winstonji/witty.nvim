@@ -96,31 +96,31 @@ function M.setup(config)
 		return { buf = buf, win = win }
 	end
 
-	local witty_toggle = "<Leader><CR>"
-	local float_toggle = "<Leader>wf"
-	local split_toggle = "<Leader>ws"
-	local vertical_toggle = "<Leader>wv"
-	local witty_hide = "q"
-
-	if config.keybinds and config.keybinds.witty_toggle then
-		witty_toggle = config.keybinds.witty_toggle
-	end
-
-	if config.keybinds and config.keybinds.float_toggle then
-		float_toggle = config.keybinds.float_toggle
-	end
-
-	if config.keybinds and config.keybinds.split_toggle then
-		split_toggle = config.keybinds.split_toggle
-	end
-
-	if config.keybinds and config.keybinds.vertical_toggle then
-		vertical_toggle = config.keybinds.vertical_toggle
-	end
-
-	if config.keybinds and config.keybinds.witty_hide then
-		witty_hide = config.keybinds.witty_hide
-	end
+	local witty_toggle = (config.keybinds and config.keybinds.witty_toggle) or "<Leader><CR>"
+	local float_toggle = (config.keybinds and config.keybinds.float_toggle) or "<Leader>wf"
+	local split_toggle = (config.keybinds and config.keybinds.split_toggle) or "<Leader>ws"
+	local vertical_toggle = (config.keybinds and config.keybinds.vertical_toggle) or "<Leader>wv"
+	local witty_hide = (config.keybinds and config.keybinds.witty_hide) or "q"
+	--
+	-- if config.keybinds and config.keybinds.witty_toggle then
+	-- 	witty_toggle = config.keybinds.witty_toggle
+	-- end
+	--
+	-- if config.keybinds and config.keybinds.float_toggle then
+	-- 	float_toggle = config.keybinds.float_toggle
+	-- end
+	--
+	-- if config.keybinds and config.keybinds.split_toggle then
+	-- 	split_toggle = config.keybinds.split_toggle
+	-- end
+	--
+	-- if config.keybinds and config.keybinds.vertical_toggle then
+	-- 	vertical_toggle = config.keybinds.vertical_toggle
+	-- end
+	--
+	-- if config.keybinds and config.keybinds.witty_hide then
+	-- 	witty_hide = config.keybinds.witty_hide
+	-- end
 
 	local function hide_terminal()
 		if vim.api.nvim_win_is_valid(state.terminal.win) then
