@@ -100,6 +100,7 @@ function M.setup(config)
 	local float_toggle = "<Leader>wf"
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
+	local witty_hide = "{<Esc>, q}"
 
 	if config.keybinds and config.keybinds.witty_toggle then
 		witty_toggle = config.keybinds.witty_toggle
@@ -119,6 +120,12 @@ function M.setup(config)
 
 	if config.keybinds and config.keybinds.witty_hide then
 		witty_hide = config.keybinds.witty_hide
+	end
+
+	local function hide_terminal()
+		if vim.api.nvim_win_is_valid(state.terminal.win) then
+			vim.api.nvim_win_hide(state.terminal.win)
+		end
 	end
 
 	-- Toggle terminal
@@ -145,9 +152,7 @@ function M.setup(config)
 	vim.keymap.set({ "n", "t" }, split_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "split" then
 			state.type = "split"
-			if vim.api.nvim_win_is_valid(state.terminal.win) then
-				vim.api.nvim_win_hide(state.terminal.win)
-			end
+			hide_terminal()
 			state.terminal = create_split_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
@@ -160,9 +165,7 @@ function M.setup(config)
 	vim.keymap.set({ "n", "t" }, float_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "floating" then
 			state.type = "floating"
-			if vim.api.nvim_win_is_valid(state.terminal.win) then
-				vim.api.nvim_win_hide(state.terminal.win)
-			end
+			hide_terminal()
 			state.terminal = create_floating_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
@@ -175,9 +178,7 @@ function M.setup(config)
 	vim.keymap.set({ "n", "t" }, vertical_toggle, function()
 		if not vim.api.nvim_win_is_valid(state.terminal.win) or state.type ~= "vertical" then
 			state.type = "vertical"
-			if vim.api.nvim_win_is_valid(state.terminal.win) then
-				vim.api.nvim_win_hide(state.terminal.win)
-			end
+			hide_terminal()
 			state.terminal = create_vertical_window({ buf = state.terminal.buf })
 			if vim.bo[state.terminal.buf].buftype ~= "terminal" then
 				vim.cmd.term()
@@ -187,6 +188,8 @@ function M.setup(config)
 	end, { desc = "Toggle [W]itty [V]ertical" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
+
+	vim.keymap.set("n", witty_hide, hide_terminal(), { buffer = state.terminal.buf, desc = { "Hide Witty" } })
 
 	vim.api.nvim_create_autocmd("TermEnter", {
 		desc = "Change local options when exiting Terminal Mode",
