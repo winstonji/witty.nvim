@@ -100,7 +100,7 @@ function M.setup(config)
 	local float_toggle = "<Leader>wf"
 	local split_toggle = "<Leader>ws"
 	local vertical_toggle = "<Leader>wv"
-	local witty_hide = "{<Esc>, q}"
+	local witty_hide = "<Esc>"
 
 	if config.keybinds and config.keybinds.witty_toggle then
 		witty_toggle = config.keybinds.witty_toggle
