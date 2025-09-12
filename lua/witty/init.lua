@@ -7,7 +7,7 @@ function M.setup(config)
 			buf = -1,
 			win = -1,
 		},
-		type = "floating",
+		type = config.defaults.type or "floating",
 	}
 
 	local function create_split_window(opts)
@@ -187,13 +187,15 @@ function M.setup(config)
 		end
 	end, { desc = "Toggle [W]itty [V]ertical" })
 
+	-- Hide terminal
 	vim.keymap.set("n", witty_hide, function()
 		hide_terminal()
-	end, { buffer = state.terminal.buf, desc = "Hide Witty" })
+	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
 
+	-- Escape to exit terminal
 	vim.keymap.set("n", "<Esc>", function()
 		hide_terminal()
-	end, { buffer = state.terminal.buf, desc = "Hide Witty" })
+	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
