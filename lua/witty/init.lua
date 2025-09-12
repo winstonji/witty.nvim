@@ -189,7 +189,9 @@ function M.setup(config)
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
-	vim.keymap.set("n", witty_hide, hide_terminal(), { buffer = state.terminal.buf, desc = { "Hide Witty" } })
+	vim.keymap.set("n", witty_hide, function()
+		hide_terminal()
+	end, { buffer = state.terminal.buf, desc = "Hide Witty" })
 
 	vim.api.nvim_create_autocmd("TermEnter", {
 		desc = "Change local options when exiting Terminal Mode",
