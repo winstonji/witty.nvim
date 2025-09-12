@@ -192,13 +192,13 @@ function M.setup(config)
 	-- Hide terminal
 	vim.keymap.set("n", witty_hide, function()
 		hide_terminal()
-	end, { remap = true, buffer = state.terminal.buf, desc = "Exit Witty" })
+	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	-- Escape to exit terminal
 	vim.keymap.set("n", "<Esc>", function()
 		hide_terminal()
 		print(state.terminal.buf)
-	end, { remap = true, buffer = state.terminal.buf, desc = "Exit Witty" })
+	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
