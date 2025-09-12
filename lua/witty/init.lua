@@ -7,8 +7,7 @@ function M.setup(config)
 			buf = -1,
 			win = -1,
 		},
-		-- type = (config and config.defaults and config.defaults.type) or "floating",
-		type = "floating",
+		type = (config and config.defaults and config.defaults.type) or "floating",
 	}
 
 	local function create_split_window(opts)
