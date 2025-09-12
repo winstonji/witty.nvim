@@ -11,6 +11,7 @@ function M.setup(config)
 	}
 
 	local function create_split_window(opts)
+		print(state.terminal.buf)
 		-- Set options
 		opts = opts or {}
 		local height = opts.height or math.min(15, math.floor(vim.o.lines * 0.2))
@@ -196,6 +197,7 @@ function M.setup(config)
 	-- Escape to exit terminal
 	vim.keymap.set("n", "<Esc>", function()
 		hide_terminal()
+		print(state.terminal.buf)
 	end, { remap = true, buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
