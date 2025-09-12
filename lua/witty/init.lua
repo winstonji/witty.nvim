@@ -122,6 +122,7 @@ function M.setup(config)
 		witty_hide = config.keybinds.witty_hide
 	end
 
+	-- Hides the Witty terminal window if it exists.
 	local function hide_terminal()
 		if vim.api.nvim_win_is_valid(state.terminal.win) then
 			vim.api.nvim_win_hide(state.terminal.win)
@@ -190,12 +191,12 @@ function M.setup(config)
 	-- Hide terminal
 	vim.keymap.set("n", witty_hide, function()
 		hide_terminal()
-	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
+	end, { remap = true, buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	-- Escape to exit terminal
 	vim.keymap.set("n", "<Esc>", function()
 		hide_terminal()
-	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
+	end, { remap = true, buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
