@@ -4,7 +4,7 @@ function M.setup(config)
 	-- Create stored state
 	local state = {
 		terminal = {
-			buf = -1,
+			buf = vim.api.nvim_create_buf(false, true),
 			win = -1,
 		},
 		type = (config and config.defaults and config.defaults.type) or "floating",
