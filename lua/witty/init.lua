@@ -97,31 +97,10 @@ function M.setup(config)
 		return { buf = buf, win = win }
 	end
 
-	local witty_toggle = "<Leader><CR>"
-	local float_toggle = "<Leader>wf"
-	local split_toggle = "<Leader>ws"
-	local vertical_toggle = "<Leader>wv"
-	local witty_hide = "q"
-
-	if config.keybinds and config.keybinds.witty_toggle then
-		witty_toggle = config.keybinds.witty_toggle
-	end
-
-	if config.keybinds and config.keybinds.float_toggle then
-		float_toggle = config.keybinds.float_toggle
-	end
-
-	if config.keybinds and config.keybinds.split_toggle then
-		split_toggle = config.keybinds.split_toggle
-	end
-
-	if config.keybinds and config.keybinds.vertical_toggle then
-		vertical_toggle = config.keybinds.vertical_toggle
-	end
-
-	if config.keybinds and config.keybinds.witty_hide then
-		witty_hide = config.keybinds.witty_hide
-	end
+	local witty_toggle = (config.keybinds and config.keybinds.witty_toggle) or "<Leader><CR>"
+	local float_toggle = (config.keybinds and config.keybinds.float_toggle) or "<Leader>wf"
+	local split_toggle = (config.keybinds and config.keybinds.split_toggle) or "<Leader>ws"
+	local vertical_toggle = (config.keybinds and config.keybinds.vertical_toggle) or "<Leader>wv"
 
 	-- Hides the Witty terminal window if it exists.
 	local function hide_terminal()
@@ -188,17 +167,6 @@ function M.setup(config)
 			vim.cmd.startinsert()
 		end
 	end, { desc = "Toggle [W]itty [V]ertical" })
-
-	-- Hide terminal
-	vim.keymap.set("n", witty_hide, function()
-		hide_terminal()
-	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
-
-	-- Escape to exit terminal
-	vim.keymap.set("n", "<Esc>", function()
-		hide_terminal()
-		print(state.terminal.buf)
-	end, { buffer = state.terminal.buf, desc = "Exit Witty" })
 
 	local term_group = vim.api.nvim_create_augroup("terminal-mode-options", { clear = true })
 
